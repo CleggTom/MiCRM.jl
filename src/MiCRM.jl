@@ -1,7 +1,12 @@
 module MiCRM
 
+import DifferentialEquations
+
+include("./Parameters.jl")
+include("./dx.jl")
+
 function greet()
-	print("Hi")
+	print("hi")
 end
 
 end
