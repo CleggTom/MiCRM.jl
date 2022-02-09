@@ -19,6 +19,7 @@ function random_communty(N,M)
     l = rand(M,M) ./ M
     l_sum = sum(l, dims = 2)[:,1]
     ρ = ones(M)
-
-    return MiCRMParameter(N,M,u,R,l,l_sum, ρ)
+    ω = zeros(M)
+    
+    return MiCRMParameter(N,M,u,R,l,l_sum, ρ, ω)
 end
