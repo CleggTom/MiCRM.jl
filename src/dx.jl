@@ -6,7 +6,7 @@ function du!(du,u,p,t)
             du[i] = u[i] * -p.R[i]
             #uptake
             for j = 1:p.M
-                du[i] += u[i] * u[p.N + j] * p.u[i,j] * (1 - p.l_sum[j]) * tox[j]
+                du[i] += u[i] * u[p.N + j] * p.u[i,j] * (1 - p.l_sum[j])
             end
         #consumers
         else
