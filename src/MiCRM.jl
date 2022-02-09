@@ -2,7 +2,7 @@ module MiCRM
 
 import DiffEqBase, OrdinaryDiffEq
 
-include("./Parameters.jl")
+include("./MiCRMParameter.jl")
 include("./du.jl")
 include("./MiCRMProblem.jl")
 
