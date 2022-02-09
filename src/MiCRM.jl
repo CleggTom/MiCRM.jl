@@ -1,9 +1,10 @@
 module MiCRM
 
-import DifferentialEquations
+import DiffEqBase, OrdinaryDiffEq
 
 include("./Parameters.jl")
 include("./du.jl")
 include("./MiCRMProblem.jl")
+
 
 end
