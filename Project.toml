@@ -1,7 +1,11 @@
 name = "MiCRM"
 uuid = "a39c0ef7-b77e-47b1-a1dd-f967908226eb"
 authors = ["Tom <t.clegg17@imperial.ac.uk> and contributors"]
-version = "0.1.0"
+version = "0.0.1"
+
+[deps]
+DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
+UnicodePlots = "b8865327-cd53-5732-bb35-84acbb429228"
 
 [compat]
 julia = "1.6"
