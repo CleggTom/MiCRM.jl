@@ -1,5 +1,8 @@
-using MiCRM
+push!(LOAD_PATH,"../src/")
+
+# using MiCRM
 using Documenter
+using MiCRM
 
 DocMeta.setdocmeta!(MiCRM, :DocTestSetup, :(using MiCRM); recursive=true)
 

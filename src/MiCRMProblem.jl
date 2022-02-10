@@ -1,8 +1,9 @@
-function MiCRMProblem(p::MiCRMParameter, u0::Array{Float64,1}, tspan::Tuple{Float64,Float64};kwargs...)
-     #generate ODE problem
-     ODEProblem(MiCRM.du!, u0, tspan, p, kwargs)
+struct MiCRMSystem
+     p::MiCRM.MiCRMParameter
+     u0::Array{Float64,1}
+     tspan::Tuple{Float64, Float64}
 end
 
-function solve_MiCRM(x)
-     solve(x,AutoTsit5(Rosenbrock23()))
+function DiffEqBase.ODEProblem(system::MiCRMSystem, kwargs...)
+      DiffEqBase.ODEProblem(DiffEqBase.ODEFunction(MiCRM.du!), system.u0, system.tspan, system.p, kwargs)
 end

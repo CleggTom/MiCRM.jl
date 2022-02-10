@@ -1,5 +1,5 @@
 function du!(du,u,p,t)
-    for i = eachindex(du)
+    for i = eachindex(u)
         #resources
         if i < p.N + 1
             #respiration
