@@ -13,7 +13,7 @@ makedocs(;
     sitename="MiCRM.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://cleggtom.github.io/MiCRM.jl",
+        canonical="https://CleggTom.github.io/MiCRM.jl",
         assets=String[],
     ),
     pages=[
