@@ -4,15 +4,17 @@ authors = ["Tom <t.clegg17@imperial.ac.uk> and contributors"]
 version = "0.0.1"
 
 [deps]
-DiffEqBase = "2b5f629d-d688-5b77-993f-72d75c75574e"
+DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
-OrdinaryDiffEq = "1dea7af3-3e70-54e6-95c3-0bf5283fa5ed"
+IfElse = "615f187c-cbe4-4ef1-ba3b-2fcf58d6d173"
+ModelingToolkit = "961ee093-0014-501f-94e3-6117800e7a78"
 Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 
 [compat]
 julia = "1.6"
 
 [extras]
+CPUSummary = "2a0fbf3d-bb9c-48f3-b0a9-814d99fd7ab9"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
