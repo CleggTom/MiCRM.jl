@@ -8,6 +8,7 @@ CurrentModule = MiCRM
 
 ## Package Features
 
+
 ## Contents
 ```@contents
 ```
@@ -17,6 +18,6 @@ Documentation for [MiCRM](https://github.com/cleggtom/MiCRM.jl).
 ```@index
 ```
 
-```@autodocs
+<!-- ```@autodocs
 Modules = [MiCRM]
-```
+``` -->
