@@ -26,6 +26,5 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/CleggTom/MiCRM.jl.git",
-    devbranch="main",
+    repo="github.com/CleggTom/MiCRM.jl.git"
 )
