@@ -1,12 +1,22 @@
 module MiCRM
 
-using Reexport
-@reexport using DiffEqBase, OrdinaryDiffEq
-using Distributions
+    using Reexport
+    @reexport using ModelingToolkit
+    @reexport using DifferentialEquations
 
+    using Distributions, IfElse
 
-include("./MiCRMParameter.jl")
-include("./du.jl")
-include("./MiCRMProblem.jl")
+    #community generation
+    include("crm_parameters.jl")
+    
+    #ModelingToolkit wrappers
+    include("MTK/crm_systems.jl")
+
+    #Differential equations wrappers
+    include("DiffEq/crm_problem.jl")
+
+    include("./coalescence.jl")
+
+    export random_micrm_params, micrm_system, micrm_params
 
 end
