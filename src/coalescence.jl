@@ -8,6 +8,7 @@ function coalesce_communities(p1::Dict,p2::Dict)
     #assertions
     @assert keys(p1) == keys(p2) "provided parameters have different keys"
     @assert p1[:M] == p2[:M] "provided systems have different resource environments"
+    @assert p1[:l] == p2[:l] "provided systems have different resource environments"
 
     #Parent Community Vector
     parent_vec = [i > p1[:N] ? 2 : 1 for i = 1:(p1[:N]+p2[:N])]
