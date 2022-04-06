@@ -11,6 +11,7 @@ ModelingToolkit = "961ee093-0014-501f-94e3-6117800e7a78"
 Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 
 [compat]
+IfElse = "0.1"
 julia = "1.6"
 
 [extras]
