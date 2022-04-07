@@ -33,7 +33,7 @@ function micrm_system(p, δ = 1e-6; name)
                 RHS -= x[i] * y[j] * u[i,j] * l[j,k]
             end
         end
-        push!(eqns, D(x[i]) ~ RHS * lb(x[i],δ))
+        push!(eqns, D(x[i]) ~ RHS)
     end
     
     #resources
@@ -55,3 +55,32 @@ function micrm_system(p, δ = 1e-6; name)
     sys = ODESystem(eqns, t; name, defaults = Dict(vars[i] => vals[i] for i = eachindex(vars)))
     return(sys)
 end
+
+"""
+    update_parameters!(sys, p_new)
+
+updates an `ODESystem` object with new parameters, preventing the need for (expensive) recalucuation of the symbolic represntation of the system. 
+"""
+function update_parameters!(sys::ODESystem, p_new)
+    @assert all([:l,:ρ,:N,:M,:R,:ω,:u] .∈ Ref(collect(keys(p_new)))) "missing parameters"
+    @assert (p_new[:N] + p_new[:M]) ==  length(states(sys)) "system size is different"
+
+    #overwrite defaults
+    for (k,v) in p_new
+        if k ∉ [:N, :M]
+            for I = CartesianIndices(v)
+                if length(I) == 1
+                    sys.defaults[ModelingToolkit.toparam(Symbolics.variables(k,I[1]))[1]] = v[I]
+                elseif length(I) == 2
+                    sys.defaults[ModelingToolkit.toparam(Symbolics.variables(k,I[1],I[2]))[1]] = v[I]
+                else
+                    error("$k has wrong dimensions")
+                end
+            end
+        end
+    end
+end
+
+# function update_parameters!(prob::ODEProblem,sys::ODESystem, p_new)
+
+# end
