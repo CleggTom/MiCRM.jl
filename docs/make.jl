@@ -18,10 +18,10 @@ makedocs(;
     ),
     pages=[
         "Home" => "index.md",
-        "Manual" => ["Guide" => "guide.md"
-                     "Examples" => "examples.md"],
-        "Library" => ["Public" => "public.md",
-                      "Internal" => "internal.md"]
+        "Manual" => ["Basic Usage" => "pages/manual/guide.md"
+                     "Examples" => "pages/manual/examples.md"],
+        "Library" => ["Public" => "pages/library/public.md",
+                      "Internal" => "pages/library/internal.md"]
     ],
 )
 
