@@ -39,4 +39,4 @@ and the epackage is installed which you can load it the `using` command in the j
 using MiCRM
 ```
 
-For more details on how to use the package please see the [full documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://cleggtom.github.io/MiCRM.jl/stable)
+For more details on how to use the package please see the [full documentation](https://cleggtom.github.io/MiCRM.jl/dev) (note that for now the dev docs will be most up to date as the package is under development)
