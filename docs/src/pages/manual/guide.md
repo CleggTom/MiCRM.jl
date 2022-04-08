@@ -16,7 +16,7 @@ In general we recomend using the second method with the `MTK` which allows for g
 
 ## Method 1: Numerical Integration Only
 
-TBD
+
 
 ## Method 2: Symbolic representation and `ModelingToolKit`
 
