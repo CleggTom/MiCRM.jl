@@ -18,8 +18,10 @@ makedocs(;
     ),
     pages=[
         "Home" => "index.md",
-        "Manual" => ["Basic Usage" => "pages/manual/guide.md"
-                     "Examples" => "pages/manual/examples.md"],
+        "Manual" => ["Basic Usage" => "pages/guide.md",
+                    "Generating Communities" => "pages/community_generation.md",
+                    "Building an ODESystem" => "pages/building_ODESystems.md",
+                    "Coalescence" => "pages/coalescence.md"],
         "Library" => ["Public" => "pages/library/public.md",
                       "Internal" => "pages/library/internal.md"]
     ],

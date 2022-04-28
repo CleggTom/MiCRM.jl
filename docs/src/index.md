@@ -10,8 +10,8 @@ CurrentModule = MiCRM
 * Random generation of random MiCRM systems
 * Streamlined interface for MiCRM simulations
 * Automated construction of symbolic MiCRM systems to allow calculations of Jacobian's ect.
-* Community coallescence 
-* 
+* Community coalescence 
+
 
 ## Contents
 ```@contents

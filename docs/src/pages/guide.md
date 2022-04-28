@@ -4,8 +4,8 @@ This page will guide you through generating and simulating the MiCRM model as de
 
 ```math
 \begin{aligned}
-    \frac{dx_i}{dt} &= \sum_{j = 0}^{M} x_i y_{j} u_{ij}  (1 - \sum_{k = 0}^{M} l_{j,k}) - x_i R_i \\
-    \frac{dy_j}{dt} &= \rho_j - y_j \omega_j - \sum_{i = 0}^{N} x_i y_{j} u_{ij} + \sum_{i = 0}^{N} \sum_{k = 0}^{M} x_i y_{k} u_{ik} l_{kj}
+    \frac{dC_i}{dt} &= \sum_{\alpha = 0}^{M} C_i R_{\alpha} u_{i\alpha}  (1 - \sum_{\beta = 0}^{M} l_{\alpha,\beta}) - C_i m_i \\
+    \frac{dR_\alpha}{dt} &= \rho_{\alpha} - R_{\alpha} \omega_{\alpha} - \sum_{i = 0}^{N} C_i R_{\alpha} u_{i\alpha} + \sum_{i = 0}^{N} \sum_{\beta = 0}^{M} C_i R_{\beta} u_{i \beta} l_{\beta \alpha}
 \end{aligned}
 ```
 The `MiCRM` package provides two ways to simulate the MiCRM system depending on your requirements:
@@ -16,7 +16,7 @@ In general we recomend using the second method with the `MTK` which allows for g
 
 ## Method 1: Numerical Integration Only
 
-
+Explain how to directly simualte with manual derivative function. Note that this is slower and less flexible (no symbolic computation) but does not require construction of the problem at runtime. 
 
 ## Method 2: Symbolic representation and `ModelingToolKit`
 
@@ -31,15 +31,15 @@ First we must generate a dictionary with values for the parameters of the MiCRM 
 
 | Parameter    	| Description                                                                  	| Key  	| Type              	| Required? |
 |--------------	|------------------------------------------------------------------------------	|------	|-------------------    |-----------|
-| ``x_i``      	| Biomass of the ``i``th consumer                                              	| -    	| `Float64`         	| ✖         |
-| ``y_j``      	| Mass of the ``j``th resource                                                 	| -    	| `Float64`         	| ✖         |
+| ``C_i``      	| Biomass of the ``i``th consumer                                              	| -    	| `Float64`         	| ✖         |
+| ``R_{\alpha}``| Mass of the ``\alpha``th resource                                             | -    	| `Float64`         	| ✖         |
 | ``N``        	| Number of consumer populations                                               	| `:N` 	| `Int64`           	| ✔         |
 | ``M``        	| Number of resources                                                          	| `:M` 	| `Int64`           	| ✔         |
-| ``u_{ij}``   	| Uptake rate of the `j`th resource  by the `i`th consumer                     	| `:u` 	| `Matrix{Float64}` 	| ✔         |
-| ``R_i``      	| Loss term for the ``i``th consumer                                           	| `:R` 	| `Vector{Float64}` 	| ✔         |
-| ``\rho_j``   	| Inflow rate for the ``j``th resource                                         	| `:ρ` 	| `Vector{Float64}` 	| ✔         |
-| ``\omega_j`` 	| Outflow term for the ``j``resource                                           	| `:ω` 	| `Vector{Float64}` 	| ✔         |
-| ``l_{jk}``   	| Proportion of uptake of the ``j``th resource leaked to the ``k``th resource. 	| `:l` 	| `Matrix{Float64}` 	| ✔         |
+| ``u_{i \alpha}``| Uptake rate of the ``\alpha``th resource  by the `i`th consumer             | `:u` 	| `Matrix{Float64}` 	| ✔         |
+| ``m_i``      	| Loss term for the ``i``th consumer                                           	| `:m` 	| `Vector{Float64}` 	| ✔         |
+| ``\rho_{\alpha}``| Inflow rate for the ``\alpha``th resource                                  | `:ρ` 	| `Vector{Float64}` 	| ✔         |
+| ``\omega_{\alpha}``| Outflow term for the ``j``resource                                       | `:ω` 	| `Vector{Float64}` 	| ✔         |
+| ``l_{\alpha \beta}``| Proportion of uptake of the ``\alpha``th resource leaked to the ``\beta``th resource.| `:l` 	| `Matrix{Float64}` 	| ✔         |
 
 The parameter dictionary must have the entries indicated above with the relevant key-value pairs. To aid in the construction of these parameter the package comes with several functions to randomly generate these parameter dictionaries with different communtiy structures (see #generating communities). 
 
