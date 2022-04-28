@@ -6,7 +6,7 @@ p = random_micrm_params(5,10,0.5)
     @test p[:N] == 5
     @test p[:M] == 10
     @test size(p[:u]) == (5,10)
-    @test size(p[:R]) == (5,)
+    @test size(p[:m]) == (5,)
     @test size(p[:ρ]) == (10,)
     @test size(p[:ω]) == (10,)
     @test size(p[:l]) == (10,10)
