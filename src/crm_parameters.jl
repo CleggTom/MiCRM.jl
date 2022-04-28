@@ -8,8 +8,8 @@ function random_micrm_params(N,M,leakage)
     du = Distributions.Dirichlet(M,1.0)
     u = rand(du, N)'
 
-    #respiration
-    R = rand(N)
+    #cost term
+    m = rand(N)
 
     #inflow + outflow
     ρ,ω = rand(M),rand(M)
@@ -17,5 +17,5 @@ function random_micrm_params(N,M,leakage)
     #leakage
     l = rand(du,M)' .* leakage
 
-    return Dict(:N => N, :M => M, :u => u, :R => R, :ρ => ρ, :ω => ω, :l => l)
+    return Dict(:N => N, :M => M, :u => u, :m => m, :ρ => ρ, :ω => ω, :l => l)
 end
