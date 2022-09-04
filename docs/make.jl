@@ -1,13 +1,16 @@
 push!(LOAD_PATH,"../src/")
 
+using Pkg
+Pkg.activate(".")
 # using MiCRM
 using Documenter
-using MiCRM
+using MiCRM, Distributions
+using MiCRM.Parameters, MiCRM.Simulations
 
 DocMeta.setdocmeta!(MiCRM, :DocTestSetup, :(using MiCRM); recursive=true)
 
 makedocs(;
-    modules=[MiCRM],
+    modules=[MiCRM, MiCRM.Parameters, MiCRM.Simulations],
     authors="Tom <t.clegg17@imperial.ac.uk> and contributors",
     repo="https://github.com/cleggtom/MiCRM.jl/blob/{commit}{path}#{line}",
     sitename="MiCRM.jl",
@@ -17,13 +20,15 @@ makedocs(;
         assets=String[],
     ),
     pages=[
-        "Home" => "index.md",
+        "Home" => "index.md"
         "Manual" => ["Basic Usage" => "pages/guide.md",
-                    "Generating Communities" => "pages/community_generation.md",
-                    "Building an ODESystem" => "pages/building_ODESystems.md",
-                    "Coalescence" => "pages/coalescence.md"],
-        "Library" => ["Public" => "pages/library/public.md",
-                      "Internal" => "pages/library/internal.md"]
+                    "Parameters" => "pages/parameters.md"]
+
+        #             "Generating Communities" => "pages/community_generation.md",
+        #             "Building an ODESystem" => "pages/building_ODESystems.md",
+        #             "Coalescence" => "pages/coalescence.md"],
+        # "Library" => ["Public" => "pages/library/public.md",
+        #               "Internal" => "pages/library/internal.md"]
     ],
 )
 
