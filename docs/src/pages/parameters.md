@@ -1,7 +1,3 @@
-<!-- ```@meta
-CurrentModule = MiCRM
-``` -->
-
 # Parameters
 
 The `MiCRM.Parameters` sub-module contains functions to automatically generate parameter sets for the MiCRM model. This page will detail the algorithms used to generate parameter combinations in the package. For the standard form of the MiCRM model they will return a `NamedTuple` with parameters listed in table below:
@@ -21,5 +17,5 @@ The `MiCRM.Parameters` sub-module contains functions to automatically generate p
 
 
 ```@autodocs
-Modules = [MiCRM]
+Modules = [MiCRM.Parameters]
 ```
