@@ -5,11 +5,16 @@ module MiCRM
     @reexport using DiffEqBase, OrdinaryDiffEq
     using LinearAlgebra, Distributions
 
+    # using MakieCore
+    # MakieCore.convert_arguments(sol::SciMLBase.SciMLSolution) = (sol[:,:],)
+
     # parameter generation
     include("./Parameters/Parameters.jl")
 
     # simulation functions
     include("./Simulations/Simulations.jl")
+
+    include("./Stressors/Stressors.jl")
 
     using .Parameters
     using .Simulations
@@ -17,5 +22,7 @@ module MiCRM
     #exports
     #Parameters
     export random_params
+
+
 
 end
