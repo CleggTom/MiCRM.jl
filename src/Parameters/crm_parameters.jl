@@ -57,7 +57,6 @@ end
 
 modular_uptake(N,M,kw::Dict{Symbol, Any}) = modular_uptake(N,M,N_clusters = kw[:N_clusters], s_ratio = kw[:s_ratio]) 
 
-
 function modular_leakage(M; N_clusters = 2, s_ratio = 10.0, λ = 0.5)
     @assert N_clusters <= M
     

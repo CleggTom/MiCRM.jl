@@ -95,5 +95,5 @@ function remove_extinct(sol)
     deleteat!(u0, to_rm)
         
     #simulate
-    return(ODEProblem(sol.prob.f, u0, (0.0,1e6), p_new))
+    return(sol.prob.f, u0, (0.0,1e6), p_new)
 end
