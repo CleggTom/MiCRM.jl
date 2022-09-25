@@ -2,7 +2,7 @@ module MiCRM
 
     using Reexport
     # # @reexport using ModelingToolkit
-    @reexport using DiffEqBase, OrdinaryDiffEq
+    # @reexport using DiffEqBase, OrdinaryDiffEq
     using LinearAlgebra, Distributions
 
     # using MakieCore
@@ -14,6 +14,7 @@ module MiCRM
     # simulation functions
     include("./Simulations/Simulations.jl")
 
+    # Stressor functions
     include("./Stressors/Stressors.jl")
 
     using .Parameters

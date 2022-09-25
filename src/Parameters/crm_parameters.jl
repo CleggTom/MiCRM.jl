@@ -57,6 +57,40 @@ end
 
 modular_uptake(N,M,kw::Dict{Symbol, Any}) = modular_uptake(N,M,N_clusters = kw[:N_clusters], s_ratio = kw[:s_ratio]) 
 
+
+function modular_leakage(M; N_clusters = 2, s_ratio = 10.0, λ = 0.5)
+    @assert N_clusters <= M
+    
+    #cluster  sizes for consumers and resources
+    cluster_R = M ÷ N_clusters
+
+    #preallocate leakage matrix
+    l = ones(M,M)
+
+    #loop over clusters
+    for g = 1:N_clusters
+        for h = 1:N_clusters
+            indx_R1 = 1 + (g-1)*cluster_R : (g == N_clusters ? M : cluster_R + (g-1)*cluster_R)
+            indx_R2 = 1 + (h-1)*cluster_R : (h == N_clusters ? M : cluster_R + (h-1)*cluster_R)
+
+            if h == g+1 || h == g
+                #calculate prob vec
+                l[indx_R1, indx_R2] .*= s_ratio
+            end
+        
+        end
+    end
+
+    for i = 1:M
+        l[i,:] = rand(Dirichlet(l[i,:]), 1)
+    end
+
+    return(l .* λ)
+end
+
+modular_leakage(N,M,kw::Dict{Symbol, Any}) = modular_leakage(M; N_clusters = kw[:N_clusters], s_ratio = kw[:s_ratio], λ = kw[:λ])
+
+
 # # ## Niche Communtiy generation
 # # begin
 # #     #square with sign

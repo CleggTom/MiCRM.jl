@@ -1,8 +1,7 @@
 module Stressors
 
-    using Distributions
-    using LinearAlgebra
-    using OrdinaryDiffEq
+    # using Distributions
+    # using LinearAlgebra
 
     include("./stressor_funcs.jl")
 end
