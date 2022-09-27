@@ -2,15 +2,13 @@ push!(LOAD_PATH,"../src/")
 
 using Pkg
 Pkg.activate(".")
-# using MiCRM
+using MiCRM
 using Documenter
-using MiCRM, Distributions
-using MiCRM.Parameters, MiCRM.Simulations
 
 DocMeta.setdocmeta!(MiCRM, :DocTestSetup, :(using MiCRM); recursive=true)
 
 makedocs(;
-    modules=[MiCRM, MiCRM.Parameters, MiCRM.Simulations],
+    modules=[MiCRM],
     authors="Tom <t.clegg17@imperial.ac.uk> and contributors",
     repo="https://github.com/cleggtom/MiCRM.jl/blob/{commit}{path}#{line}",
     sitename="MiCRM.jl",
