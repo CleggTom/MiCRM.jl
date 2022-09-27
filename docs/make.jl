@@ -5,7 +5,7 @@ Pkg.activate(".")
 using MiCRM
 using Documenter
 
-DocMeta.setdocmeta!(MiCRM, :DocTestSetup, :(using MiCRM); recursive=true)
+# DocMeta.setdocmeta!(MiCRM, :DocTestSetup, :(using MiCRM); recursive=true)
 
 makedocs(;
     modules=[MiCRM],

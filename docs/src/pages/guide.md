@@ -6,7 +6,7 @@ This page will guide you through simulating microbial consumer resource models (
 2. Define system dynamics
 3. Simulate system
 
-This guide will walkthrough the simulation of the basic MiCRM model given by the set of equations:
+We will walkthrough the simulation of the basic MiCRM model given by the set of equations:
 
 ```math
 \begin{aligned}
@@ -32,7 +32,7 @@ with parameters:
 
 ## Generating Community Parameters
 
-The first step of any simulation is to generate a set of parameters for a given microbial community. `MiCRM.jl` stores all parameters in `NamedTuples` which are immutable making them fast (cannot be altered once created) and (as the name would suggest) indexable by name allowing for easy construction of derivative function. In this example we will consider a simple unstructured community where uptake and leakage values are randomly drawn from a dirchlet distribution and all other parameters are set to 1:
+The first step of any simulation is to generate a set of parameters for a given microbial community. `MiCRM.jl` stores all parameters in `NamedTuples` which are immutable (cannot be altered once created) making them fast and (as the name would suggest) indexable by name. This makes them easy to use in the derivative function. In this example we will consider a simple unstructured community where uptake and leakage values are randomly drawn from a dirchlet distribution and all other parameters are set to 1:
 
 ```
     using Distributions
@@ -56,7 +56,7 @@ The first step of any simulation is to generate a set of parameters for a given 
     param = (N = N, M = M, u = u, m = m, ρ = ρ, ω = ω, l = l, λ = leakage)
 ```
 
-In practice it is much more convenient to wrap this in a function. `MiCRM.jl` comes with several such functions (see XXX) to generate communities under different assumptions including the random case above. These functions are accessible in the `MiCRM.Parameters` submodule. The code to generate a random community thus becomes:
+In practice it is much more convenient to wrap this in a function. In `MiCRM.jl` this is all wrapped in the `generate_params` function. This function  takes various functions as arguments which define how the parameters in the model are generated  (see XXX for more detail). By default `generate_params` creates communities with random parameters as above. The code to generate a random community thus becomes:
 
 ```
     using MiCRM
@@ -65,10 +65,10 @@ In practice it is much more convenient to wrap this in a function. `MiCRM.jl` co
     N,M,leakage = 10,10,0.3
 
     #generate community parameters
-    param = MiCRM.Parameters.random_params(N,M,leakage)
+    param = MiCRM.Parameters.generate_params(N,M,leakage)
 ```
 
-You can of course define their own function to generate communities, the only requirements being that it returns a `NamedTuple` object with the correct fields (see XXX for more detail). 
+You can of course define your own functions to generate communities (see XXX for more detail). 
 
 ## Defining System Dynamics
 
@@ -90,5 +90,4 @@ Once we have the parameters and the derivative equation we are ready to simulate
 ```
 
 ## Analysis
-
 Once the simulation is done 

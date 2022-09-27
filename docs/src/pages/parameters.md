@@ -13,9 +13,9 @@ The `MiCRM.Parameters` sub-module contains functions to automatically generate p
 | ``\rho_{\alpha}``| Inflow rate for the ``\alpha``th resource                                  | `ρ` 	|
 | ``\omega_{\alpha}``| Outflow term for the ``j``resource                                       | `ω` 	|
 | ``l_{\alpha \beta}``| Proportion of uptake of the ``\alpha``th resource leaked to the ``\beta``th resource.| `l` 	|
-| ``\lambda_{\alpha}``| Total proportion of the ``\alpha``th resource leaked, same as ``\sum_{\beta} l_{\alpha,\beta}``|  `λ` |
+| ``kw`` | Additional parameters to be used 
 
 
-```@autodocs
-Modules = [MiCRM.Parameters]
-```
+<!-- ```@docs
+MiCRM.Parameters
+``` -->
