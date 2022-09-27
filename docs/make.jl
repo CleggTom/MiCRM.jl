@@ -1,9 +1,11 @@
 push!(LOAD_PATH,"../src/")
 
-using Pkg
-Pkg.activate(".")
-using MiCRM
+# using MiCRM
 using Documenter
+using MiCRM
+
+DocMeta.setdocmeta!(MiCRM, :DocTestSetup, :(using MiCRM); recursive=true)
+
 
 # DocMeta.setdocmeta!(MiCRM, :DocTestSetup, :(using MiCRM); recursive=true)
 
