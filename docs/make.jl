@@ -21,15 +21,15 @@ makedocs(;
     ),
     pages=[
         "Home" => "index.md"
-        "Manual" => ["Basic Usage" => "pages/guide.md",
-                    "Parameters" => "pages/parameters.md"]
-
-        #             "Generating Communities" => "pages/community_generation.md",
-        #             "Building an ODESystem" => "pages/building_ODESystems.md",
-        #             "Coalescence" => "pages/coalescence.md"],
-        # "Library" => ["Public" => "pages/library/public.md",
-        #               "Internal" => "pages/library/internal.md"]
-    ],
+        "Manual" => ["Basic Usage" => "pages/overview.md",
+                    "Parameters" => ["Overview" => "pages/parameters/parameters.md",
+                                    "Parameter generators" => "pages/parameters/community_generation.md",
+                                    "Coalescence"=>"pages/parameters/coalescence.md"],
+                    "Simulations" => ["Overview" => "pages/simulations/simulations.md",
+                                    "Custom Dynamics" => "pages/simulations/custom_dynamics.md"],
+                    "Analysis" => ["Overview" => "pages/analysis/analysis.md",
+                                    "Effective Lottka Volterra" => "pages/analysis/GLV.md"]
+    ]],
 )
 
 deploydocs(;
