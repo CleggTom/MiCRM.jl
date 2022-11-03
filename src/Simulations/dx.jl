@@ -1,5 +1,5 @@
 """
-    growth_MiCRM!(dx,x,p,i)
+    growth_MiCRM!(dx,x,p,t,i)
 
 default growth function for the MiCRM.
 """
@@ -8,13 +8,15 @@ function growth_MiCRM!(dx,x,p,t,i)
     dx[i] += -p.m[i] * x[i]
     #resource uptake
     for α = 1:p.M
-        dx[i] += x[α + p.N] * x[i] * p.u[i,α] * (1 - p.λ)
+        for β = 1:p.M
+            dx[i] += x[α + p.N] * x[i] * p.u[i,α] * (1 - p.l[α,β])
+        end
     end
 end
 
 
 """
-    supply_MiCRM!(dx,x,p,i)
+    supply_MiCRM!(dx,x,p,t,α)
 
 default supply function for the MiCRM.
 """
@@ -24,7 +26,7 @@ function supply_MiCRM!(dx,x,p,t,α)
 end
 
 """
-depletion_MiCRM!(dx,x,p,i)
+    depletion_MiCRM!(dx,x,p,t,i,α)
 
 default depletion function for the MiCRM.
 """
@@ -40,21 +42,16 @@ end
 function null_func!(dx,x,p,t)
 end
 
-# doc"""
-#     dx!(dx,x,p,t, growth! = growth_MiCRM!, supply!::Function = supply_MiCRM!, uptake!::Function = uptake_MiCRM!)   
+"""
+    dx!(dx,x,p,t; 
+        growth!::Function = growth_MiCRM!, 
+        supply!::Function = supply_MiCRM!,
+        depletion!::Function = depletion_MiCRM!,
+        extrinsic!::Function = null_func!)
 
-# Derivative function for the general MICRM model. 
-# This function is used internally by the `DiffEq` solver which requires the first four arguments (`dx!(dx,x,p,t)`). 
-# The additional arguments detail the exact functional form of the model which overall looks like:
-# ```math
-#     \begin{align}
-#         \frac{C_i}{dt} = f(C_i, \bf{R}, p) \\
-#         \frac{R_\alpha}{dt} = g(\bf{R}, p) + h(\bf{R},\bf{C}, p)
-#     \end{align}
+Derivative function for the general MICRM model. This function is used internally by the `DiffEq` solver which requires the first four arguments (`dx!(dx,x,p,t)`). 
 
-
-# ```
-# """
+"""
 function dx!(dx,x,p,t; 
         growth!::Function = growth_MiCRM!, 
         supply!::Function = supply_MiCRM!,
