@@ -25,7 +25,7 @@ function generate_params(N,M;f_m = default_m, f_ρ = default_ρ, f_ω = default_
     u = f_u(N,M,kw)
     l = f_l(N,M,kw)
 
-    return (N = N, M = M, u = u, m = m, ρ = ρ, ω = ω, l = l, λ = λ, kw = NamedTuple(zip(keys(kwargs),values(kwargs))))
+    return (N = N, M = M, u = u, m = m, ρ = ρ, ω = ω, l = l, kw = NamedTuple(zip(keys(kwargs),values(kwargs))))
 end
 
 #uptake functions
