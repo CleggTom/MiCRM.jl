@@ -2,7 +2,7 @@
 
 Function to calculate the jacobian of an effective Lotka-Volterra
 System. Takes in parameter dictionary from Eff_LV_params and an
-optional solution for equilibrium values to find lenarization near
+optional solution for equilibrium values to find linearisation near
 steady state.
 
 """
