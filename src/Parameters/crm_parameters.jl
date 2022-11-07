@@ -1,4 +1,7 @@
 #defaults
+"""
+default params
+"""
 default_m(N,M,kw) = ones(N)
 default_ρ(N,M,kw) = ones(M) * M
 default_ω(N,M,kw) = ones(M)
@@ -6,7 +9,9 @@ default_u(N,M,kw) = copy(rand(Distributions.Dirichlet(M,1.0), N)')
 default_l(N,M,kw) = copy(rand(Distributions.Dirichlet(M,1.0), M)') .* kw[:λ]
 
 """
-    generate_params(N,M;f_m = default_m, f_ρ = default_ρ, f_ω = default_ω, f_u = default_u, f_l = default_l, kwargs...)
+    generate_params(N,M;f_m = default_m, f_ρ = default_ρ, 
+        f_ω = default_ω, f_u = default_u, 
+        f_l = default_l, kwargs...)
 
 Function to generate parameter sets for MiCRM simualtions. Requires the system size is defined as well as the functions to generate the actual parameters used in the simulations. Extra arguments can also be passed via the `kwargs` argument. 
 

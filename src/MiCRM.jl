@@ -14,6 +14,9 @@ module MiCRM
     # simulation functions
     include("./Simulations/Simulations.jl")
 
+    # Analysis functions
+    include("./Analysis/Analysis.jl")
+
     # Stressor functions
     include("./Stressors/Stressors.jl")
 
