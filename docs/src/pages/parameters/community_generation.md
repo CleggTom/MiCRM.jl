@@ -1,1 +1,6 @@
-TBD: Contains info on the communtiy generation tools and the requirements they have. 
+TBD: Contains info on the specific parameter generating functions included already
+
+```@docs
+Parameters.modular_uptake
+Parameters.modular_leakage
+```
