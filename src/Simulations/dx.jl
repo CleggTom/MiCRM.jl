@@ -8,9 +8,11 @@ function growth_MiCRM!(dx,x,p,t,i)
     dx[i] += -p.m[i] * x[i]
     #resource uptake
     for α = 1:p.M
+        tmp = 0.0
         for β = 1:p.M
-            dx[i] += x[α + p.N] * x[i] * p.u[i,α] * (1 - p.l[α,β])
+            tmp += p.l[α,β]
         end
+        dx[i] += x[α + p.N] * x[i] * p.u[i,α] * (1 - tmp)
     end
 end
 
