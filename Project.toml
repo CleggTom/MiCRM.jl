@@ -4,8 +4,12 @@ authors = ["Tom <t.clegg17@imperial.ac.uk> and contributors"]
 version = "0.0.1"
 
 [deps]
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+DiffEqBase = "2b5f629d-d688-5b77-993f-72d75c75574e"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
 Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 
 [compat]
