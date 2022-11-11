@@ -23,11 +23,8 @@ module MiCRM
 
     using .Parameters
     using .Simulations
+    using .Analysis
 
     #exports
-    #Parameters
-    export random_params
-
-
 
 end
