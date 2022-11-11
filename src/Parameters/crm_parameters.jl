@@ -47,8 +47,8 @@ function modular_uptake(N,M; N_modules = 2, s_ratio = 10.0)
        @assert N_modules <= M
     
     #module sizes for consumers and resources
-    modules_C = N ÷ N_modules
-    modules_R = M ÷ N_modules
+    module_C = N ÷ N_modules
+    module_R = M ÷ N_modules
 
     #preallocate uptake matrix
     u = zeros(N,M)
