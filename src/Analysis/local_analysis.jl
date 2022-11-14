@@ -28,7 +28,7 @@ end
 Determine the stability a system given its jaccobian by testing if the real part of the leading eigenvalue is positive. 
 """
 function get_stability(J)
-    eigvals(J)[end] < 0.0
+    Real(eigvals(J)[end]) < 0.0
 end
 
 """
@@ -37,7 +37,14 @@ end
 Caclulate the instantaneous rate of growth of the perturbation u at time t. The observation vector `w` can be optionally supplied to consider linear combinations of the state variables. This can include any linear combination of state variables such as the mass of specific components of the system as well as total functioning measures. 
 """
 function get_Rins(J, u, t, w = ones(size(J)[1]))
-    tr(J * exp(J * t) * u * w') / tr(exp(J * t) * u * w')
+    # tr(J * exp(J * t) * u * w') / tr(exp(J * t) * u * w')
+    x = exp(J * t) * u
+    dx = J * exp(J * t) * u
+    #norm
+    x_n = (w .* x)' * (w .* x)
+    dx_n = (w .* dx)' * (w .* x) + (w .* x)' * (w .* dx)
+
+    return(dx_n / x_n)
 end
     
 """
@@ -55,5 +62,5 @@ end
 get the rate of return of the system from perturbation. This value is determined by the leading eigenvalue regardless of the direction of the perturbation or the observation vector we choose. 
 """
 function get_return_rate(J)
-    eigvals(J)[end]
+    Real(eigvals(J)[end])
 end
