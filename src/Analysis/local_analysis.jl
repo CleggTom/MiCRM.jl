@@ -8,7 +8,7 @@ TDB
 """
 function get_jac(sol)
     #assert equilibrium
-    all(abs.(sol(sol.t[end], Val{1})) .< eps())
+    @assert all(abs.(sol(sol.t[end], Val{1})) .< eps())
 
     function f(x)
         dx = similar(x)
@@ -32,6 +32,15 @@ function get_stability(J)
 end
 
 """
+    get_displacement(J, u, t, w = ones(size(J)[1]))
+
+TBW
+"""
+function get_displacement(J, u, t, w = ones(size(J)[1]))
+    (w .* exp(J * t) * u)' * (w .* exp(J * t) * u)
+end
+
+"""
     get_Rins(J, t, w = ones(size(J)[1]))
 
 Caclulate the instantaneous rate of growth of the perturbation u at time t. The observation vector `w` can be optionally supplied to consider linear combinations of the state variables. This can include any linear combination of state variables such as the mass of specific components of the system as well as total functioning measures. 
@@ -44,7 +53,7 @@ function get_Rins(J, u, t, w = ones(size(J)[1]))
     x_n = (w .* x)' * (w .* x)
     dx_n = (w .* dx)' * (w .* x) + (w .* x)' * (w .* dx)
 
-    return(dx_n / x_n)
+    return(dx_n / (2 * x_n))
 end
     
 """
