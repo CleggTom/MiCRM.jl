@@ -44,36 +44,36 @@ The number of modules determines how many groups of resources the consumers are 
 The degree of specialisation is determined by the `s_ratio` value. This controls the relative value of the dirchlet `α` parameters which determine how the probabiltiy density function is distributed over the different resources. Specialisation is obtained by setting the `α` values for resources that specialists consume to higher values meaning they have a higher probablity of a larger value. When `s_ratio = 1` the proabailtiy is uniform and all resources are equally likely to be consumed. When `s_ratio >1` then consumers are more likely to consume resources within thier module. 
 """
 function modular_uptake(N,M; N_modules = 2, s_ratio = 10.0)
-       @assert N_modules <= M
-    
-    #module sizes for consumers and resources
-    module_C = N ÷ N_modules
-    module_R = M ÷ N_modules
+    @assert N_modules <= M && N_modules <= N
 
-    #preallocate uptake matrix
+    #baseline
+    sR = M ÷  N_modules
+    dR = M - (N_modules * sR)
+
+    sC = N ÷  N_modules
+    dC = N - (N_modules * sC)
+
+    #get module sizes and add to make to M
+    diffR = fill(sR, N_modules)
+    diffR[sample(1:N_modules, dR, replace = false)] .+= 1
+    mR = [collect(x:y) for (x,y) = zip((cumsum(diffR) .- diffR .+ 1) , cumsum(diffR))]
+
+    #get module sizes and add to make to M
+    diffC = fill(sC, N_modules)
+    diffC[sample(1:N_modules, dC, replace = false)] .+= 1
+    mC = [collect(x:y) for (x,y) = zip((cumsum(diffC) .- diffC .+ 1) , cumsum(diffC))]
+
+    #preallocate u mat
     u = zeros(N,M)
 
-    #loop over modules
-    for g = 1:N_modules
-        indx_C = 1 + (g-1)*module_C : module_C + (g-1)*module_C
-        indx_R = 1 + (g-1)*module_R : module_R + (g-1)*module_R
-
-        if g == N_modules
-            indx_C = 1 + (g-1)*module_C : N
-            indx_R = 1 + (g-1)*module_R : M
-        end
-
-        #calculate prob vec
-        a_vec = ones(M)
-        a_vec[indx_R] .*= s_ratio
-
-        d = Dirichlet(a_vec)
-        x = rand(d, length(indx_C))
-        # println(indx_C, size(x')," ",size(u))
-
-        u[indx_C, :] .= x'
+    #
+    for (x,y) = zip(mC,mR)
+        u[x,y] .*= s_ratio
     end
     
+    #return u
+    [u[i,:] .= u[i,:] ./ sum(u[i,:] ) for i = 1:N]
+
     return(u)
 end
 
@@ -97,31 +97,28 @@ The degree of to which resources leak in this constrained way (verses randomly a
 function modular_leakage(M; N_modules = 2, s_ratio = 10.0, λ = 0.5)
     @assert N_modules <= M
     
-    #module  sizes for consumers and resources
-    module_R = M ÷ N_modules
+    #baseline
+    sR = M ÷  N_modules
+    dR = M - (N_modules * sR)
 
-    #preallocate leakage matrix
-    l = ones(M,M)
+    #get module sizes and add to make to M
+    diffR = fill(sR, N_modules)
+    diffR[sample(1:N_modules, dR, replace = false)] .+= 1
+    mR = [collect(x:y) for (x,y) = zip((cumsum(diffR) .- diffR .+ 1) , cumsum(diffR))]
 
-    #loop over modules
-    for g = 1:N_modules
-        for h = 1:N_modules
-            indx_R1 = 1 + (g-1)*module_R : (g == N_modules ? M : module_R + (g-1)*module_R)
-            indx_R2 = 1 + (h-1)*module_R : (h == N_modules ? M : module_R + (h-1)*module_R)
+    l = rand(M,M)
 
-            if h == g+1 || h == g
-                #calculate prob vec
-                l[indx_R1, indx_R2] .*= s_ratio
+    for (i,x) = enumerate(mR)
+        for (j,y) = enumerate(mR)
+            if i == j || i+1 == j
+                l[x,y] .*= s_ratio
             end
-        
         end
     end
 
-    for i = 1:M
-        l[i,:] = rand(Dirichlet(l[i,:]), 1)
-    end
+    [l[i,:] .= λ * l[i,:] ./ sum(l[i,:] ) for i = 1:M]
 
-    return(l .* λ)
+    return(l)
 end
 
 """
