@@ -64,7 +64,7 @@ function modular_uptake(N,M; N_modules = 2, s_ratio = 10.0)
     mC = [collect(x:y) for (x,y) = zip((cumsum(diffC) .- diffC .+ 1) , cumsum(diffC))]
 
     #preallocate u mat
-    u = zeros(N,M)
+    u = rand(N,M)
 
     #
     for (x,y) = zip(mC,mR)
