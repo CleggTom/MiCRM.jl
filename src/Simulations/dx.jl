@@ -61,13 +61,8 @@ function dx!(dx,x,p,t;
         extrinsic!::Function = null_func!)
    
     for i = 1:p.N #consumer loop
-        #reset derivatives
         dx[i] = 0.0
-        #if consumer is extant
-        if x[i] > eps(x[i])
-            growth!(dx,x,p,t,i) #update dx of ith consumer
-        end
-
+        growth!(dx,x,p,t,i) #update dx of ith consumer
     end
 
     for α = 1:p.M #resource loop
