@@ -16,7 +16,6 @@ function growth_MiCRM!(dx,x,p,t,i)
     end
 end
 
-
 """
     supply_MiCRM!(dx,x,p,t,α)
 

@@ -6,9 +6,9 @@ Numerically calculate jacobian of system from the solution object. Assumes that 
 ## Example
 TDB
 """
-function get_jac(sol)
+function get_jac(sol::T; thresh = eps()) where T <: SciMLBase.AbstractODESolution
     #assert equilibrium
-    @assert all(abs.(sol(sol.t[end], Val{1})) .< eps())
+    @assert all(abs.(sol(sol.t[end], Val{1})) .< thresh)
 
     function f(x)
         dx = similar(x)
@@ -19,7 +19,25 @@ function get_jac(sol)
         return(dx)
     end
 
-    ForwardDiff.jacobian(f, sol[end])
+    return(ForwardDiff.jacobian(f, sol[end]))
+end
+
+"""
+    get_jac(sol::SteadyStateSolution; thresh = eps())
+
+For SteadyState solution types
+"""
+function get_jac(sol::SteadyStateSolution)
+    function f(x)
+        dx = similar(x)
+        dx .= 0.0
+        # MiCRM.Simulations.dx!(dx,x,p,1.0)
+        deriv = SciMLBase.unwrapped_f(sol.prob.f)
+        deriv(dx,x,sol.prob.p,1.0)
+        return(dx)
+    end
+
+    return(ForwardDiff.jacobian(f, sol.u))
 end
 
 """

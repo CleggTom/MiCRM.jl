@@ -3,7 +3,7 @@
 default params
 """
 default_m(N,M,kw) = ones(N)
-default_ρ(N,M,kw) = ones(M) * M
+default_ρ(N,M,kw) = ones(M) 
 default_ω(N,M,kw) = ones(M)
 default_u(N,M,kw) = copy(rand(Distributions.Dirichlet(M,1.0), N)')
 default_l(N,M,kw) = copy(rand(Distributions.Dirichlet(M,1.0), M)') .* kw[:λ]
