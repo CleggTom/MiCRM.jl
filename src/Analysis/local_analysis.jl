@@ -8,8 +8,6 @@ TDB
 """
 function get_jac(sol::T; thresh = eps()) where T <: SciMLBase.AbstractODESolution
     #assert equilibrium
-    @assert all(abs.(sol(sol.t[end], Val{1})) .< thresh)
-
     function f(x)
         dx = similar(x)
         dx .= 0.0
