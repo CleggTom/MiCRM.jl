@@ -31,7 +31,7 @@ makedocs(;
                                     "Custom Dynamics" => "pages/simulations/custom_dynamics.md"],
                     "Analysis" => ["Overview" => "pages/analysis/analysis.md",
                                     "Effective Lottka Volterra" => "pages/analysis/GLV.md",
-                                    "Local Stability Analysis" => "page/analysis/local_stability.md"]
+                                    "Local Stability Analysis" => "pages/analysis/local_stability.md"]
     ]],
 )
 
