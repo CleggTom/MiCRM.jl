@@ -71,9 +71,7 @@ function dx!(dx,x,p,t;
         supply!(dx,x,p,t,α)
         #loop over consumers
         for i = 1:p.N
-            if x[i] > eps(x[i])
                 depletion!(dx,x,p,t,i,α)
-            end
         end
     end
 
